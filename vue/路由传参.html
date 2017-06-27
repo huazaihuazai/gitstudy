@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+		<head>
+			<title></title>
+      <meta charset="utf-8">
+		</head>
+		<body>
+
+		   <div id="box">
+		   	    
+                <p style="width:20%;float:left">
+                   <router-link to="/home"  style="display:block">主页</router-link>
+                   <router-link to="/news"  style="display:block">新闻</router-link>
+                   
+
+		        </p>
+
+
+		      
+                
+                    <router-view style="width:77%;float:right"></router-view>
+
+              
+                 
+		   </div>
+
+
+           <template id="news">
+               <div>
+                   <p>
+                       <router-link to="/username/hua/age/10">hua</router-link>
+                       <router-link to="/username/fei/age/12">fei</router-link>
+                       <router-link to="/username/jun/age/15">jun</router-link>
+
+
+                   </p>
+
+                   <router-view></router-view>
+
+
+
+               </div>
+                
+           </template>
+
+		</body>
+		<script type="text/javascript" src="vue.js"></script>
+		<script type="text/javascript" src="vue-router.js"></script>
+		<script type="text/javascript">
+                 var Home={
+                 	template:"<div>主页啊</div>"
+                 }
+
+                 var News={
+                 	template:"#news"
+                 }
+
+                 var list1={
+                    template:"<div>{{$route.params}}</div>"
+                 }
+
+                  
+
+                
+
+                 // var routes=[
+                 //    {path:'/home',component:Home},
+                 //    {path:'/news',component:News}
+                 // ];
+
+                 var routers=new VueRouter({
+                 	routes:[
+                    {path:'/home',component:Home},
+                    {path:'/news',component:News,
+                       children:[
+                         {path: '/username/:username/age/:age',component: list1},
+                        ]
+                    },
+                    {path:"*",redirect:"/news"}
+                 ]
+                 });
+
+                 new Vue({
+                 	el:"#box",
+                 	router:routers
+                 })
+
+
+
+		</script>
+</html>		

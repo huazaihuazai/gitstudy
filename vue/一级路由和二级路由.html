@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+		<head>
+			<title></title>
+		</head>
+		<body>
+
+		   <div id="box">
+		   	    
+                <p style="width:20%;float:left">
+                   <router-link to="/home"  style="display:block">主页</router-link>
+                   <router-link to="/news"  style="display:block">新闻</router-link>
+                   
+
+		        </p>
+
+
+		      
+                
+                    <router-view style="width:77%;float:right"></router-view>
+
+              
+                 
+		   </div>
+
+
+           <template id="news">
+               <div>
+                   <p>
+                       <router-link to="/list1">列表1</router-link>
+                       <router-link to="/list2">列表2</router-link>
+                       <router-link to="/list3">列表3</router-link>
+
+
+                   </p>
+
+                   <router-view></router-view>
+
+
+
+               </div>
+                
+           </template>
+
+		</body>
+		<script type="text/javascript" src="vue.js"></script>
+		<script type="text/javascript" src="vue-router.js"></script>
+		<script type="text/javascript">
+                 var Home={
+                 	template:"<div>主页啊</div>"
+                 }
+
+                 var News={
+                 	template:"#news"
+                 }
+
+                 var list1={
+                    template:"<div>list1</div>"
+                 }
+
+                 var list2={
+                    template:"<div>list2</div>"
+                 }
+
+                 var list3={
+                    template:"<div>list3</div>"
+                 }
+
+                 // var routes=[
+                 //    {path:'/home',component:Home},
+                 //    {path:'/news',component:News}
+                 // ];
+
+                 var routers=new VueRouter({
+                 	routes:[
+                    {path:'/home',component:Home},
+                    {path:'/news',component:News,
+                       children:[
+                         {path: '/list1',component: list1},
+                         {path: '/list2',component: list2},
+                         {path: '/list3',component: list3},
+                         {path: '/',component: list1},
+                        ]
+                    },
+                    {path:"/",redirect:"/news"}
+                 ]
+                 });
+
+                 new Vue({
+                 	el:"#box",
+                 	router:routers
+                 })
+
+
+
+		</script>
+</html>		
